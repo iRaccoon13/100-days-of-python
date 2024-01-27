@@ -4,7 +4,7 @@ import os,random,sys
 sys.path.append(os.path.dirname(os.path.dirname(__file__)))
 from loading import loading_screen
 #from time import time
-loading_screen(logo,1)
+loading_screen(logo,500)
 # Clear console
 def cls():
   os.system('cls' if os.name == 'nt' else 'clear')
@@ -22,15 +22,17 @@ while lives > 0 and not wordguessed:
   print(logo)
   livespunc = "!" if lives < 3 else "."
   print("_ " * len(word)) if firstguess else print(formatted_display)
-  while True:
+  guess_allowed = False
+  while not guess_allowed:
     guess = input(f"\nGuess?- {lives} lives left{livespunc} \n\n:").lower()
     if len(guess) == 1:
-      break
+      guess_allowed = True
     else:
       cls()
       print(logo)
       print("Please enter a single letter.")
       input("Press enter to continue. ")
+      cls()
   if guess in lettersguessed:
     cls()
     print(logo)
@@ -68,4 +70,4 @@ if wordguessed:
   print(f"You won! The word was {word}!")
 else:
   print(f"You lost! The word was {word}!")
-  input("Press enter to go home. ")
+input("Press enter to go home. ")

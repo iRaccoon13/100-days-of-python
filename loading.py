@@ -8,4 +8,4 @@ def loading_screen(logo,delay):
     Bs = 10-i
     print(logo)
     print(f"[{A*i}{B*Bs}]")
-    sleep(delay)
+    sleep(delay/1000)
