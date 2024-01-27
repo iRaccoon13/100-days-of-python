@@ -1,9 +1,10 @@
 from hangman_art import logo, stages
 from hangman_words import word_list
-import os
-import random
-from time import time
-
+import os,random,sys
+sys.path.append(os.path.dirname(os.path.dirname(__file__)))
+from loading import loading_screen
+#from time import time
+loading_screen(logo,1)
 # Clear console
 def cls():
   os.system('cls' if os.name == 'nt' else 'clear')
@@ -19,11 +20,10 @@ formatted_display = ""
 while lives > 0 and not wordguessed:
   cls()
   print(logo)
-  print(f"Your word is {len(word)} letters long:")
   livespunc = "!" if lives < 3 else "."
-  print("_" * len(word)) if firstguess else print(formatted_display)
+  print("_ " * len(word)) if firstguess else print(formatted_display)
   while True:
-    guess = input(f"\nGuess?- {lives} lives left{livespunc} \n:").lower()
+    guess = input(f"\nGuess?- {lives} lives left{livespunc} \n\n:").lower()
     if len(guess) == 1:
       break
     else:
@@ -53,13 +53,13 @@ while lives > 0 and not wordguessed:
     else:
       cls()
       print(logo)
-      print(f"Correct! {lives} lives left{livespunc}\nPress enter to try again!")
+      print(f"Correct! {lives} lives left{livespunc}\nPress enter to continue!")
       lettersguessed.append(guess)
       input()
     #check if word is guessed and setup display
     display = []
     for i in word:
-      display.append("_") if i not in lettersguessed else display.append(i)
+      display.append("_ ") if i not in lettersguessed else display.append(i)
     formatted_display = ""
     for i in display:
       formatted_display += i
