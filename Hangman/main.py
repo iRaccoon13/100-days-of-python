@@ -25,7 +25,7 @@ while lives > 0 and not wordguessed:
   guess_allowed = False
   while not guess_allowed:
     guess = input(f"\nGuess?- {lives} lives left{livespunc} \n\n:").lower()
-    if len(guess) == 1:
+    if len(guess) == 1 and not guess.isdigit():
       guess_allowed = True
     else:
       cls()
@@ -45,8 +45,6 @@ while lives > 0 and not wordguessed:
       word.index(guess)
     except ValueError:
       lives -= 1
-      if lives == 0:
-        break
       cls()
       print(logo)
       print(f"Wrong! {lives} lives left{livespunc}\nPress enter to try again!\n")
@@ -65,7 +63,7 @@ while lives > 0 and not wordguessed:
     formatted_display = ""
     for i in display:
       formatted_display += i
-    wordguessed = bool("_" not in display)
+    wordguessed = True if formatted_display == word else False
 if wordguessed:
   print(f"You won! The word was {word}!")
 else:
